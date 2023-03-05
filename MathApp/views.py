@@ -2,7 +2,9 @@ from django.shortcuts import render
 
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from MathApp.models import eMath
 from MathApp.serializers import MathSerializer
@@ -12,6 +14,8 @@ from Uid import genUid
 # Create your views here.
 
 @api_view(['GET'])
+@authentication_classes([JWTAuthentication])
+@permission_classes((IsAuthenticated,))
 def getMathNotes(request):
     mathNotes = eMath.objects.all()
     mathNotesSerializer = MathSerializer(mathNotes, many=True)

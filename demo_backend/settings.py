@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-g($3_%q!k9kbdse0sagbkuj@!nmf(y-+1h64vu7-f)k+p=qhvy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'MathApp.apps.MathappConfig',
     'corsheaders',
     'rest_framework',
+    'rest_framework_simplejwt',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -148,3 +149,16 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken',
     'x-requested-with',
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTENTICATION_CLASSES': (
+        'rest_framework_simple.jwt.authentication.JWTAutentication',
+    )
+}
+
+from datetime import timedelta
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': True
+}
