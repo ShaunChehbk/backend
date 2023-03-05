@@ -22,6 +22,8 @@ def getMathNotes(request):
     return Response(mathNotesSerializer.data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
+@authentication_classes([JWTAuthentication])
+@permission_classes((IsAuthenticated,))
 def addMathNote(request):
     data = request.data
     data['id'] = genUid()
