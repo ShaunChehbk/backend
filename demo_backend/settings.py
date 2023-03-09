@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'LinguistApp.apps.LinguistappConfig',
     'TodoApp.apps.TodoappConfig',
     'RecordApp.apps.RecordappConfig',
     'MathApp.apps.MathappConfig',
